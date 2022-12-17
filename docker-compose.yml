@@ -1,0 +1,24 @@
+version: '3'
+services:
+  api:
+    build: ./api
+    container_name: 'api'
+    ports:
+      - 8000:8000
+    volumes:
+      - './api:/code'
+    env_file:
+      - api/.env
+  frontend:
+    build: ./frontEnd
+    container_name: 'frontend'
+    ports:
+      - 3000:3000
+    volumes:
+      - './frontEnd:/app'
+    command: npm start
+    stdin_open: true
+    environment:
+       - CHOKIDAR_USEPOLLING=true
+  
+
